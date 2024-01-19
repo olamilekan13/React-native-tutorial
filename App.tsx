@@ -16,8 +16,6 @@ const TabNavigation = createBottomTabNavigator();
 
 
 
-
-
 const App = () => {
 
 
