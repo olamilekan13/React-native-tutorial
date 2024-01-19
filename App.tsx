@@ -1,87 +1,75 @@
 import 'react-native-gesture-handler';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import { HomeComponent } from './src/pages/Home';
-import Icon from '@expo/vector-icons/Ionicons';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native';
+import HomeComponent from './src/pages/HomeComponent';
+import HistoryComponent from './src/pages/HistoryComponent';
+import FavouriteComponent from './src/pages/FavouriteComponent';
+import ProfileComponent from './src/pages/ProfileComponent';
+import Icon from "@expo/vector-icons/Feather";
+import { AppSytles } from './src/static/AppStyles';
+
+
+// Initialization of React Bottom Navigation
+const TabNavigation = createBottomTabNavigator();
 
 
 
-const Tabs = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+
 
 const App = () => {
 
-
-  const ScreenTwoView = ()=> {
-    return (
-
-      <Tabs.Navigator>
-
-        <Tabs.Screen name='Home' options={{
-          tabBarIcon: ({focused})=> { return focused ? <Icon name='home' size={26} /> : <Icon name='home-outline' size={26} /> },
-          tabBarShowLabel: false,
-        }} component={HomeComponent} />
-
-        <Tabs.Screen name='Histories' options={{
-          
-          tabBarIcon: ({focused})=> {return focused ? <Icon name='time' size={26} /> : <Icon name='time-outline' size={26} />  },
-          tabBarShowLabel: false,
-
-        }}  component={ScreenTwoView} />
-
-        <Tabs.Screen name='About' options={{
-          
-          tabBarIcon: ()=> {return <Icon name='heart-outline' size={26} /> },
-          tabBarShowLabel: false,
-        }} component={ScreenThreeView} />
-
-        <Tabs.Screen name='Profile' options={{
-
-          tabBarIcon: ()=> {return <Icon name='person-outline' size={26} /> },
-          tabBarShowLabel: false
-
-        }} component={ScreenFourView} />
-
-      </Tabs.Navigator>
-    )
-  }
-
-
-  const ScreenThreeView = ()=> {
-    return (
-      <View>
-        <Text>Screen Three</Text>
-      </View>
-    )
-  }
-
-  const ScreenFourView = ()=> {
-    return (
-      <View>
-        <Text>Screen Four</Text>
-      </View>
-    )
-  }
 
 
   return (
     
     <NavigationContainer>
 
-      <SafeAreaView style={{flex: 1}}>
+      <TabNavigation.Navigator screenOptions={{
+        headerShown: false, 
+        tabBarShowLabel: false
+      }}>
 
-      <Drawer.Navigator>
+        {/* Home Component */}
+        <TabNavigation.Screen name='Home' options={{
 
-          <Drawer.Screen name="Homes" component={HomeComponent} />
-          <Drawer.Screen name="History" component={ScreenTwoView} />
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon name="home" style={{ opacity: focused ? 1 : 0.5 }} size={AppSytles.TabBarIconSize} />
+            )
+          }
 
-        </Drawer.Navigator>
+        }}  component={HomeComponent}  />
 
+        {/* History Component */}
+        <TabNavigation.Screen name='History' options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon name="clock" style={{ opacity: focused ? 1 : 0.5 }} size={AppSytles.TabBarIconSize} />
+            )
+          }
+        }} component={HistoryComponent}  />
+        
+        {/* Favourite Component */}
+        <TabNavigation.Screen name='Favourite' options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon name="heart" style={{ opacity: focused ? 1 : 0.5 }} size={AppSytles.TabBarIconSize} />
+            )
+          }
+        }} component={FavouriteComponent}  />
+        
+        {/* Profile Component */}
+        <TabNavigation.Screen name='Profile' options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Icon name="user" style={{ opacity: focused ? 1 : 0.5 }} size={AppSytles.TabBarIconSize} />
+            )
+          }
+        }} component={ProfileComponent}  />
 
-      </SafeAreaView>
+      </TabNavigation.Navigator>
 
     </NavigationContainer>
 
