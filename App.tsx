@@ -9,6 +9,7 @@ import FavouriteComponent from './src/pages/FavouriteComponent';
 import ProfileComponent from './src/pages/ProfileComponent';
 import Icon from "@expo/vector-icons/Feather";
 import { AppSytles } from './src/static/AppStyles';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 // Initialization of React Bottom Navigation
@@ -23,6 +24,8 @@ const App = () => {
   return (
     
     <NavigationContainer>
+
+      <GestureHandlerRootView style={{flex: 1}}>
 
       <TabNavigation.Navigator screenOptions={{
         headerShown: false, 
@@ -69,6 +72,8 @@ const App = () => {
 
       </TabNavigation.Navigator>
 
+
+      </GestureHandlerRootView>
     </NavigationContainer>
 
   )
